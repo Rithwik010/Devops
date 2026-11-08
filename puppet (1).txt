@@ -1,0 +1,27 @@
+# 1. Install Puppet Agent
+choco install puppet-agent -y
+$env:Path += ";C:\Program Files\Puppet Labs\Puppet\bin"
+puppet --version
+
+# 2. Create Puppet directory
+New-Item -Path "C:\puppet" -ItemType Directory -Force
+
+# 3. Create Puppet manifest
+@'
+class install_git {
+  package { 'git':
+    ensure   => installed,
+    provider => chocolatey,
+  }
+}
+include install_git
+'@ | Set-Content -Path "C:\puppet\site.pp" -Encoding ASCII
+
+# 4. Install Chocolatey module
+puppet module install puppetlabs-chocolatey
+
+# 5. Apply Puppet configuration
+puppet apply C:\puppet\site.pp
+
+# 6. Verify Git installation
+git --version

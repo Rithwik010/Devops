@@ -1,0 +1,42 @@
+# STEP 1: Install Java
+winget install EclipseAdoptium.Temurin.21.JDK
+
+# STEP 2: Verify Java
+java -version
+
+# STEP 3: Start Jenkins Service
+Start-Service Jenkins
+
+# STEP 4: Check Jenkins Status
+Get-Service Jenkins
+
+# STEP 5: Open Jenkins Dashboard
+Start-Process "http://localhost:8080"
+
+# STEP 6: Get Initial Admin Password
+Get-Content "C:\ProgramData\Jenkins\.jenkins\secrets\initialAdminPassword"
+
+# STEP 7: Open Jenkins Dashboard
+# Complete setup and install suggested plugins.
+# Create admin account.
+
+# STEP 8: Create Freestyle Project
+# Dashboard -> New Item -> MyFirstJob
+# Select Freestyle Project -> OK
+
+# STEP 9: Add Build Step
+# Select Build Steps -> Execute Windows batch command
+# Enter the following commands:
+
+echo Starting Jenkins Build
+echo Hello from Jenkins
+echo Continuous Integration
+echo Building Application
+echo Testing Application
+echo Build Completed Successfully
+
+# STEP 10: Save and Click Build Now
+# Open Build History -> Console Output
+
+# STEP 11: Expected Output
+# Finished: SUCCESS

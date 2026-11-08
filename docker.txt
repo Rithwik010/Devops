@@ -1,0 +1,55 @@
+Experiment 5 — Docker: Architecture, Container Life Cycle and Docker Commands
+
+Step 1 — Install Docker Desktop
+Download Docker Desktop for Windows and complete the installation.
+
+Step 2 — Check Docker context
+docker context ls
+
+Step 3 — Select Docker Desktop context
+docker context use desktop-linux
+
+Step 4 — Check running containers
+docker ps
+
+Step 5 — Check Docker version
+docker --version
+
+Step 6 — Display Docker information
+docker info
+
+Step 7 — Download Nginx image
+docker pull nginx
+
+Step 8 — List Docker images
+docker images
+
+Step 9 — Remove Nginx image
+docker rmi nginx
+
+Step 10 — Download Nginx image again
+docker pull nginx
+
+Step 11 — Run Hello World container
+docker run hello-world
+
+Step 12 — Run Alpine container interactively
+docker run -it alpine sh
+
+Step 13 — Display kernel information
+uname -a
+
+Step 14 — Display Alpine information
+cat /etc/os-release
+
+Step 15 — Check working directory
+pwd
+
+Step 16 — List files
+ls -l
+
+Step 17 — Exit the container
+exit
+
+Step 18 — Display command history
+Get-History

@@ -1,0 +1,73 @@
+# STEP 1: Start Jenkins Controller
+Start-Service Jenkins
+
+# STEP 2: Open Jenkins Dashboard
+Start-Process "http://localhost:8080"
+
+# STEP 3: Create Agent Directory
+New-Item -ItemType Directory -Force -Path "C:\JenkinsAgent"
+
+# STEP 4: Verify Java
+java -version
+
+# STEP 5: Configure Agent in Jenkins Dashboard
+# Manage Jenkins -> Nodes -> New Node
+# Node Name: Slave1
+# Select: Permanent Agent
+# Remote Root Directory: C:\JenkinsAgent
+# Number of Executors: 2
+# Launch Method: Launch agent by connecting it to the controller
+# Click Save
+
+# STEP 6: Download agent.jar
+Invoke-WebRequest `
+  -Uri "http://CONTROLLER_IP:8080/jnlpJars/agent.jar" `
+  -OutFile "C:\JenkinsAgent\agent.jar"
+
+# STEP 7: Connect Agent
+# Copy the actual secret from the Slave1 node page.
+cd C:\JenkinsAgent
+
+java -jar agent.jar `
+  -url http://CONTROLLER_IP:8080/ `
+  -secret YOUR_AGENT_SECRET `
+  -name Slave1 `
+  -workDir "C:\JenkinsAgent"
+
+# STEP 8: Verify Agent
+# Jenkins Dashboard -> Manage Jenkins -> Nodes
+# Check Slave1 status: Online
+
+# STEP 9: Create Freestyle Project
+# Dashboard -> New Item -> SlaveJob
+# Select Freestyle Project -> OK
+
+# STEP 10: Restrict Build to Agent
+# Select Restrict where this project can be run
+# Enter: Slave1
+
+# STEP 11: Add Build Step
+# Select Execute Windows batch command
+
+echo Jenkins Controller Agent Architecture
+echo Executing Build on Agent
+hostname
+echo Building Application
+echo Testing Application
+echo Build Completed Successfully
+
+# STEP 12: Save and Click Build Now
+# Open Console Output
+# Expected: Finished: SUCCESS
+
+# STEP 13: Stop Agent
+# Press Ctrl+C in agent terminal
+
+# STEP 14: Stop Jenkins Controller
+Stop-Service Jenkins
+
+# STEP 15: Start Jenkins Controller
+Start-Service Jenkins
+
+# STEP 16: Verify Jenkins
+Get-Service Jenkins

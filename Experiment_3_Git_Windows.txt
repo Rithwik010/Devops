@@ -1,0 +1,87 @@
+Experiment 3 – Git Installation, Configuration and Execution on Windows
+
+Step 1 – Install Git
+Open PowerShell as Administrator and run:
+winget install --id Git.Git -e
+
+Close and reopen PowerShell, then verify:
+git --version
+
+Step 2 – Configure Git
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+git config --list
+
+Step 3 – Create a working directory
+mkdir GitDemo
+cd GitDemo
+
+Step 4 – Initialize a Git repository
+git init
+
+Step 5 – Create a file
+New-Item file1.txt -ItemType File
+Set-Content file1.txt "This is my first Git experiment"
+Get-Content file1.txt
+
+Step 6 – Check repository status
+git status
+
+Step 7 – Add the file to the staging area
+git add file1.txt
+
+Step 8 – Commit the change
+git commit -m "First Commit"
+
+Step 9 – Create a GitHub repository
+1. Open https://github.com
+2. Log in to your account.
+3. Click New Repository.
+4. Enter the repository name: GitDemo.
+5. Click Create Repository.
+
+Step 10 – Connect the local repository to GitHub
+Replace USERNAME with your GitHub username:
+git remote add origin https://github.com/USERNAME/GitDemo.git
+git remote -v
+
+Step 11 – Rename the default branch
+git branch -M main
+
+Step 12 – Push the repository to GitHub
+git push -u origin main
+
+GitHub may ask you to authenticate through your browser.
+
+COMPLETE CODE – Execute in PowerShell
+
+If Git is already installed, skip the installation command.
+Create the GitHub repository before running the complete block.
+Replace USERNAME with your GitHub username.
+
+winget install --id Git.Git -e
+
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+
+mkdir GitDemo
+cd GitDemo
+
+git init
+
+New-Item file1.txt -ItemType File
+Set-Content file1.txt "This is my first Git experiment"
+
+git status
+git add file1.txt
+git commit -m "First Commit"
+
+git branch -M main
+git remote add origin https://github.com/USERNAME/GitDemo.git
+git push -u origin main
+
+git status
+git log --oneline
+
+Expected Result
+The file file1.txt will be committed locally and pushed to your GitHub repository.
